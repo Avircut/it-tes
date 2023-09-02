@@ -1,7 +1,5 @@
 @import "variables/global";
-@import "themes/dark";
-@import "themes/light";
-@import "themes/purple";
+@import "themes/default";
 @import "reset";
 
 body {
@@ -16,21 +14,6 @@ body {
 
 .content-page {
   display: flex;
-}
-
-*::-webkit-scrollbar {
-  width: 12px;               /* ширина scrollbar */
-  height: 8px;
-}
-
-*::-webkit-scrollbar-track {
-  background: var(--card-bg);        /* цвет дорожки */
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: var(--inverted-primary-color);    /* цвет плашки */
-  border-radius: 20px;       /* закругления плашки */
-  border: 2px solid var(--primary-color);  /* padding вокруг плашки */
 }
 
 .logo_svg__logo-text {

@@ -9,7 +9,7 @@ interface BooksPageProps {
 }
 
 export const BooksPage = memo((props: BooksPageProps) => {
-  const { className } = props;
+  const { className } = props; // TODO: add reducer for form
   const {
     data: volumes, isLoading, error, refetch,
   } = useFetchBooksList({ query: '' });
