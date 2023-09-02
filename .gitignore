@@ -4,4 +4,3 @@ node_modules
 .loki/report.json
 .loki/report.html
 /reports
-src/shared/const/api.ts
