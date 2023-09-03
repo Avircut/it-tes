@@ -1,0 +1,124 @@
+@use "vars";
+@use "media";
+
+// Для изменения стилей, которые будут иметь отражение на всем проекте
+// При этом локальные стили будут иметь более высокий приоритет из-за очередности
+html,
+body {
+  height: 100%;
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  margin: 0 auto;
+
+  @include media.mobile {
+    font-size: 14px;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
+input,
+textarea {
+  border-radius: 8px;
+  appearance: none;
+  font-size: inherit;
+  padding: 12px;
+  width: 100%;
+  outline: none;
+  border: 1px solid var(--primary-color);
+  resize: none;
+  transition: 0.3s all ease-in-out;
+
+  &::placeholder {
+    color: var(--primary-color);
+  }
+}
+
+input:disabled,
+textarea:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+input:focus {
+  outline: none;
+  appearance: none;
+}
+
+a {
+  transition: 0.3s all ease-in-out;
+}
+
+.more {
+  cursor: pointer;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+*:focus-visible {
+  outline: 1px solid var(--primary-color);
+}
+
+.section {
+  margin-bottom: 80px;
+
+  &__title {
+    margin-bottom: 20px;
+  }
+}
+
+.main {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex: 0 0 auto;
+}
+
+.content-wrapper {
+  max-width: $desktopMaxWidth;
+  margin: 0 auto;
+  width: 100%;
+
+  @include media.notebook {
+    max-width: $notebookMaxWidth;
+  }
+
+  @include media.tablet {
+    max-width: $tabletMaxWidth;
+  }
+
+  @include media.mobile {
+    max-width: $mobileMaxWidth;
+  }
+}
+
+.section-margin {
+  margin-top: $desktopSectionsMargin;
+}
+
+.section-padding {
+  padding-top: $desktopSectionsMargin;
+}
+
+.full-w {
+  width: 100%;
+}
+
+.margin_header {
+  margin-top: -$headerHeight;
+
+  @include media.notebook {
+    margin-top: -$headerHeightNotebook;
+  }
+
+  @include media.mobile {
+    margin-top: -$headerHeightMobile;
+  }
+}

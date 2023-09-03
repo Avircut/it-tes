@@ -1,0 +1,23 @@
+.ButtonInput {
+  position: relative;
+}
+
+.input {
+  background: var(--input-bg);
+  border-radius: 48px;
+  padding: 11px 12px;
+  color: var(--primary-color);
+  font-size: 17px;
+
+  &::placeholder {
+    color: var(--secondary-color);
+  }
+}
+
+.btn {
+  flex-shrink: 0;
+  position: absolute;
+  right: 10px;
+  height: 24px;
+  width: 24px;
+}

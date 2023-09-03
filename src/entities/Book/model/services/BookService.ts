@@ -3,18 +3,19 @@ import { Volume } from '../types/BookSchema';
 
 const booksApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    FetchQueriedBooks: build.query<Volume[], {query:string, sort?:string, startIndex?:number, maxResult?:number}>({
+    FetchQueriedBooks: build.query<Volume[], {query?:string, sort?:string, startIndex?:number, maxResults?:number}>({
       query: ({
-        query, sort = 'relevance', startIndex = 0, maxResult = 30,
+        query, sort = 'relevance', startIndex = 0, maxResults = 30,
       }) => ({
         url: '/volumes',
         params: {
           q: query,
           orderBy: sort,
           startIndex,
-          maxResult,
+          maxResults,
         },
       }),
+      transformResponse: (response:{items:Volume[]}) => response?.items,
       providesTags: (result) => ['Book'],
     }),
   }),

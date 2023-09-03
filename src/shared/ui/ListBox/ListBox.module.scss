@@ -10,12 +10,28 @@
   margin: 0;
 }
 
+.icon {
+  flex-shrink: 0;
+  transition: 0.15s all ease-in-out;
+}
+
+.open {
+  border-radius: 10px 10px 0 0;
+
+  .icon {
+    transform: rotate(180deg);
+  }
+}
+
 .options {
   background: var(--listbox-bg);
   position: absolute;
   z-index: 10000;
-  border-radius: 12px;
+  border-radius: 0 0 12px 12px;
   box-shadow: 4px 4px 8px var(--listbox-bg);
+  overflow: hidden;
+  width: 100%;
+  color: var(--primary-color);
 
   &.bottomLeft {
     top: 100%;
@@ -36,6 +52,11 @@
     bottom: 100%;
     left: 0;
   }
+}
+
+.caption {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .item {

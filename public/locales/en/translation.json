@@ -1,4 +1,17 @@
 {
   "Language": "en",
-  "Find a book": "Find a book"
+  "Find a book": "Find a book",
+  "Input Placeholder": "The Master and Margarita",
+  "Category": "Category",
+  "Sort by": "Sort by",
+  "all": "all",
+  "art": "art",
+  "biography": "biography",
+  "computers": "computers",
+  "history": "history",
+  "medical": "medical",
+  "poetry": "poetry",
+  "relevance": "relevance",
+  "newest": "newest",
+  "Choose from List": "Choose from List"
 }

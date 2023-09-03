@@ -22,6 +22,12 @@ export const Clear: Story = {
     children: 'Тест',
   },
 };
+export const ClearPadding: Story = {
+  args: {
+    theme: ButtonTheme.CLEAR_PADDING,
+    children: 'Тест',
+  },
+};
 export const ClearInverted: Story = {
   args: {
     theme: ButtonTheme.CLEAR_INVERTED,

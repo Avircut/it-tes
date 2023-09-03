@@ -12,11 +12,20 @@
 }
 
 .clear,
-.clear_inverted {
+.clear_inverted,
+.clear_padding {
   padding: 0;
   border: none;
   background: none;
   outline: none;
+}
+
+.clear_padding {
+  padding: 6px 12px;
+}
+
+.clear_padding:hover {
+  background-color: var(--white-overlay-color);
 }
 
 .clear_inverted {
@@ -51,6 +60,16 @@
   background: var(--inverted-bg-color);
   color: var(--inverted-primary-color);
   border: none;
+}
+
+.listbox {
+  padding: 8px 20px;
+  background: var(--input-bg);
+  border-radius: 10px;
+  color: var(--primary-color);
+  border: none;
+  position: relative;
+  width: 200px;
 }
 
 .square {

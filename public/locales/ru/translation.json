@@ -1,4 +1,17 @@
 {
   "Language": "ru",
-  "Find a book": "Найти книгу"
+  "Find a book": "Найти книгу",
+  "Input Placeholder": "Мастер и Маргарита",
+  "Category": "Категория",
+  "Sort by": "Сортировать по",
+  "all": "все",
+  "art": "искусство",
+  "biography": "биография",
+  "computers": "компьютеры",
+  "history": "история",
+  "medical": "медицина",
+  "poetry": "поэзия",
+  "relevance": "релевантности",
+  "newest": "новизне",
+  "Choose from List": "Выберите из списка"
 }

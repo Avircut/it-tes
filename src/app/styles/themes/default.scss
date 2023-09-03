@@ -1,21 +1,23 @@
 :root {
-  --bg-color: #11104d;
-  --inverted-bg-color: #eeefb2;
-  --primary-color: #048804;
-  --secondary-color: #05a505;
-  --inverted-primary-color: #ff5aff;
-  --inverted-secondary-color: #fb77fb;
+  --bg-color: #fff;
+  --primary-color: #222;
+  --secondary-color: #7a7a7a;
+  --inverted-primary-color: #fff;
+  --inverted-secondary-color: #fff;
+  --stroke-color: #6c6c6c;
 
   // skeleton
-  --skeleton-color: #060080;
-  --skeleton-shadow: #0900b6;
-
-  // Code
-  --code-bg: #0e147e;
-
-  // card
-  --card-bg: #201e75;
+  --skeleton-color: #aaa;
+  --skeleton-shadow: #808080;
 
   // listbox
-  --listbox-bg: #201e75;
+  --listbox-bg: #e7e7e7;
+  --listbox-selected: #aaa;
+  --listbox-active: #cc2323;
+
+  // card
+  --card-bg: #f4f4f4;
+
+  // inputs
+  --input-bg: rgb(247 248 248 / 80%);
 }

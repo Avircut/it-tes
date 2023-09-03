@@ -1,3 +1,33 @@
-.BooksPageHeader{
+.BooksPageHeader {
+  height: 500px;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+}
 
+.langSwitcher {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+
+.formWrapper {
+  position: relative;
+
+  &::before {
+    content: "";
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: var(--overlay-color);
+    height: 100%;
+    display: block;
+    position: absolute;
+  }
+}
+
+.form {
+  z-index: 1;
+  color: var(--bg-color);
 }

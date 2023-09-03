@@ -1,32 +1,27 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Categories, Sorts } from 'entities/Book';
 import { FindBookFormSchema } from '../types/findBookFormSchema';
 
 const initialState: FindBookFormSchema = {
-    
+  query: '',
+  category: Categories.ALL,
+  sort: Sorts.RELEVANCE,
 };
 
 export const findBookFormSlice = createSlice({
-    name: 'findBookForm',
-    initialState,
-    reducers: {
-        template: (state, action: PayloadAction<string>) => {
-           
-        },
+  name: 'findBookForm',
+  initialState,
+  reducers: {
+    setQuery: (state, action: PayloadAction<string>) => {
+      state.query = action.payload;
     },
-    // extraReducers: (builder) => {
-    //     builder
-    //         .addCase(, (state) => {
-    //             state.error = undefined;
-    //             state.isLoading = true;
-    //         })
-    //         .addCase(, (state) => {
-    //             state.isLoading = false;
-    //         })
-    //         .addCase(, (state, action) => {
-    //             state.isLoading = false;
-    //             state.error = action.payload;
-    //         });
-    // },
+    setCategory: (state, action: PayloadAction<Categories>) => {
+      state.category = action.payload;
+    },
+    setSort: (state, action: PayloadAction<Sorts>) => {
+      state.sort = action.payload;
+    },
+  },
 });
 
 export const { actions: findBookFormActions } = findBookFormSlice;
