@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Text, TextSize, TextTheme } from './Text';
+import {
+  Text, TextSize, TextTheme, TextWeight,
+} from './Text';
 
 const meta = {
   title: 'shared/Text',
@@ -55,5 +57,23 @@ export const SizeM: Story = {
     title: 'Lorem ipsum dolor sit amet consectetur.',
     text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque eos impedit possimus. Placeat minima sit ab, tenetur fugiat sint mollitia.',
     size: TextSize.M,
+  },
+};
+
+export const SemiBold: Story = {
+  args: {
+    title: 'Lorem ipsum dolor sit amet consectetur.',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque eos impedit possimus. Placeat minima sit ab, tenetur fugiat sint mollitia.',
+    size: TextSize.M,
+    weight: TextWeight.SEMIBOLD,
+  },
+};
+
+export const Bold: Story = {
+  args: {
+    title: 'Lorem ipsum dolor sit amet consectetur.',
+    text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque eos impedit possimus. Placeat minima sit ab, tenetur fugiat sint mollitia.',
+    size: TextSize.M,
+    weight: TextWeight.BOLD,
   },
 };

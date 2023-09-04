@@ -9,7 +9,8 @@ interface Book {
   description: string;
   pageCount: number;
   categories: string[];
-  imageLinks: ImageLinks
+  imageLinks: ImageLinks;
+  infoLink: string;
 }
 interface Price {
   amount: number;

@@ -13,5 +13,14 @@
   "poetry": "poetry",
   "relevance": "relevance",
   "newest": "newest",
-  "Choose from List": "Choose from List"
+  "Choose from List": "Choose from List",
+  "Please fill the form": "Please fill the form to get books shown",
+  "Total found": "Total found",
+  "results": "books",
+  "Loading Books Error": "Error ocuared when loading books",
+  "Something went wrong": "Something went wrong",
+  "Reload Page": "Reload Page",
+  "Make another request": "Try another request",
+  "Load more": "Load more",
+  "Not Found": "Not Found"
 }

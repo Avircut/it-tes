@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
-import { memo, useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { HStack, VStack } from 'shared/ui/Stack';
 import { Text, TextSize, TextTheme } from 'shared/ui/Text/Text';
 import { Listbox, ListboxItem } from 'shared/ui/ListBox/ListBox';
@@ -12,22 +12,23 @@ import {
 } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from 'shared/lib/hooks/useAppSelector/useAppSelector';
+
+import {
+  BooksPageActions,
+  BooksPageReducer,
+} from '../../model/slices/BooksPageSlice';
 import {
   getCategory,
-  getQuery,
   getSort,
+  getInputValue,
 } from '../../model/selectors/findBookForm';
-import {
-  findBookFormActions,
-  findBookFormReducer,
-} from '../../model/slices/findBookFormSlice';
 import cls from './FindBookForm.module.scss';
 
 interface FindBookFormProps {
   className?: string;
 }
 const reducers: ReducersList = {
-  bookForm: findBookFormReducer,
+  booksPage: BooksPageReducer,
 };
 export const FindBookForm = memo((props: FindBookFormProps) => {
   const { className } = props;
@@ -41,27 +42,40 @@ export const FindBookForm = memo((props: FindBookFormProps) => {
     content: t(sort),
   }));
   const dispatch = useAppDispatch();
-  const query = useAppSelector(getQuery);
   const category = useAppSelector(getCategory);
   const sort = useAppSelector(getSort);
+  const inputValue = useAppSelector(getInputValue);
   const onChangeCategory = useCallback(
     (value: string) => {
-      dispatch(findBookFormActions.setCategory(value as Categories));
+      dispatch(BooksPageActions.setQuery(inputValue));
+      dispatch(BooksPageActions.setCategory(value as Categories));
     },
-    [dispatch],
+    [dispatch, inputValue],
   );
   const onChangeSort = useCallback(
     (value: string) => {
-      dispatch(findBookFormActions.setSort(value as Sorts));
+      dispatch(BooksPageActions.setQuery(inputValue));
+      dispatch(BooksPageActions.setSort(value as Sorts));
     },
-    [dispatch],
+    [dispatch, inputValue],
   );
-  const onChangeQuery = useCallback(
+  const onChangeInput = useCallback(
     (value: string) => {
-      dispatch(findBookFormActions.setQuery(value));
+      dispatch(BooksPageActions.setInputValue(value));
     },
     [dispatch],
   );
+  const onKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLInputElement>) => {
+      if (e.key === 'Enter') {
+        dispatch(BooksPageActions.setQuery(inputValue));
+      }
+    },
+    [dispatch, inputValue],
+  );
+  const onSearchClick = useCallback(() => {
+    dispatch(BooksPageActions.setQuery(inputValue));
+  }, [dispatch, inputValue]);
   return (
     <DynamicModuleLoader removeAfterUnmount reducers={reducers}>
       <VStack
@@ -78,9 +92,11 @@ export const FindBookForm = memo((props: FindBookFormProps) => {
         />
         <VStack gap="8" align="stretch" className={cls.formWrapper}>
           <ButtonInput
-            value={query}
             placeholder={t('Input Placeholder')}
-            onChange={onChangeQuery}
+            onClick={onSearchClick}
+            onKeyDown={onKeyDown}
+            onChange={onChangeInput}
+            value={inputValue}
           />
           <HStack gap="16">
             <Listbox

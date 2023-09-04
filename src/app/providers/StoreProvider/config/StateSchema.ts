@@ -7,12 +7,12 @@ import {
   Reducer,
   ReducersMapObject,
 } from '@reduxjs/toolkit';
-import { FindBookFormSchema } from 'features/findBookForm';
+import { BooksPageSchema } from 'pages/BooksPage';
 import { AppDispatch } from './store';
 
 export interface StateSchema {
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>,
-  bookForm?: FindBookFormSchema
+  booksPage?: BooksPageSchema
 }
 
 export type StateSchemaKey = keyof StateSchema;

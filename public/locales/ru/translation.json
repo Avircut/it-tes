@@ -13,5 +13,14 @@
   "poetry": "поэзия",
   "relevance": "релевантности",
   "newest": "новизне",
-  "Choose from List": "Выберите из списка"
+  "Choose from List": "Выберите из списка",
+  "Please fill the form": "Пожалуйста, заполните форму, чтобы увидеть книги",
+  "Total found": "Всего найдено",
+  "results": "книг",
+  "Loading Books Error": "Произошла ошибка при загрузке книг",
+  "Something went wrong": "Что-то пошло не так",
+  "Reload Page": "Перезагрузить страницу",
+  "Make another request": "Попробуйте другой запрос",
+  "Load more": "Загрузи больше",
+  "Not Found": "Не удалось найти ресурс по данному адресу"
 }

@@ -2,10 +2,10 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { LangSwitcher } from 'widgets/LangSwitcher';
-import { FindBookForm } from 'features/findBookForm';
 import { HStack, VStack } from 'shared/ui/Stack';
 import bg from 'shared/assets/content/form-bg.jpg';
 import cls from './BooksPageHeader.module.scss';
+import { FindBookForm } from '../FindBookForm/FindBookForm';
 
 interface BooksPageHeaderProps {
   className?: string;
