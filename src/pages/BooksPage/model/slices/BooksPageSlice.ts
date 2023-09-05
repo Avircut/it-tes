@@ -8,6 +8,7 @@ const initialState: BooksPageSchema = {
   sort: Sorts.RELEVANCE,
   startIndex: 0,
   maxResults: 30,
+  _inited: false,
 };
 
 export const BooksPageSlice = createSlice({
@@ -29,8 +30,17 @@ export const BooksPageSlice = createSlice({
     setInputValue: (state, action: PayloadAction<string>) => {
       state.inputValue = action.payload;
     },
+    setStartIndex: (state, action: PayloadAction<number>) => {
+      state.startIndex = action.payload;
+    },
+    setMaxResults: (state, action: PayloadAction<number>) => {
+      state.maxResults = action.payload;
+    },
     IncrementPage: (state) => {
       state.startIndex += state.maxResults;
+    },
+    InitPage: (state) => {
+      state._inited = true;
     },
   },
 });

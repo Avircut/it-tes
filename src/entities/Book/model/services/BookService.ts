@@ -1,34 +1,58 @@
 import { rtkApi } from 'shared/api/rtkApi';
+import { addQueryParams } from 'shared/lib/url/addQueryParams';
 import { Volume } from '../types/BookSchema';
 
-interface ResponseSchema{
-  items:Volume[];
-  totalItems:number;
+interface ResponseSchema {
+  items: Volume[];
+  totalItems: number;
 }
 const booksApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    FetchQueriedBooks: build.query<ResponseSchema, {query:string, sort?:string, startIndex?:number, maxResults?:number}>({
+    FetchQueriedBooks: build.query<
+      ResponseSchema,
+      { query: string; sort?: string; startIndex?: number; maxResults?: number }
+    >({
       query: ({
-        query, sort = 'relevance', startIndex = 0, maxResults = 30,
-      }) => ({
-        url: '/volumes',
-        params: {
-          q: query,
-          orderBy: sort,
-          startIndex,
-          maxResults,
-        },
-      }),
+        query,
+        sort = 'relevance',
+        startIndex = 0,
+        maxResults = 30,
+      }) => {
+        addQueryParams({
+          query,
+          sort,
+          startIndex: String(startIndex),
+          maxResults: String(maxResults),
+        });
+        return {
+          url: '/volumes',
+          params: {
+            q: query,
+            orderBy: sort,
+            startIndex,
+            maxResults,
+          },
+        };
+      },
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
-      merge: (currentCache, newItems) => {
-        currentCache.items.push(...newItems.items);
+      merge: (currentCache, newItems, { arg }) => {
+        // If first page (only if changed query or sort) replace all volumes
+        if (arg.startIndex === 0) {
+          currentCache.items = newItems.items;
+          currentCache.totalItems = newItems.totalItems;
+        } else if (newItems.totalItems) {
+          currentCache.items.push(...newItems.items);
+          // Handle if Google API returns no items
+        } else if (!newItems.items && arg.startIndex !== undefined) {
+          currentCache.totalItems = arg.startIndex;
+        }
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.query !== previousArg?.query || currentArg?.sort !== previousArg?.sort;
+        return currentArg?.startIndex !== previousArg?.startIndex;
       },
-      transformResponse: (response:ResponseSchema) => response,
+      transformResponse: (response: ResponseSchema) => response,
       providesTags: (result) => ['Book'],
     }),
   }),

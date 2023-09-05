@@ -2,11 +2,15 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { memo, useCallback } from 'react';
 import { Categories, useFetchBooksList } from 'entities/Book';
 import { useAppSelector } from 'shared/lib/hooks/useAppSelector/useAppSelector';
-import { buildQuery } from 'shared/lib/buildQuery/buildQuery';
+import { buildQuery } from 'shared/lib/bookQuery/buildQuery';
 import { VStack } from 'shared/ui/Stack';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { LoadMore } from 'shared/ui/LoadMore/LoadMore';
-import { BooksPageActions } from '../../model/slices/BooksPageSlice';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
+import { useSearchParams } from 'react-router-dom';
+import { DynamicModuleLoader, ReducersList } from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
+import { initBooksPage } from '../../model/services/initBooksPage';
+import { BooksPageActions, BooksPageReducer } from '../../model/slices/BooksPageSlice';
 import cls from './BooksPage.module.scss';
 import { BooksPageHeader } from '../BooksPageHeader/BooksPageHeader';
 import { BooksList } from '../BooksList/BooksList';
@@ -17,10 +21,13 @@ import {
 interface BooksPageProps {
     className?: string;
 }
-
+const reducers: ReducersList = {
+  booksPage: BooksPageReducer,
+};
 export const BooksPage = memo((props: BooksPageProps) => {
   const { className } = props;
   const dispatch = useAppDispatch();
+  const [searchParams] = useSearchParams();
   const query = useAppSelector(getQuery);
   const sort = useAppSelector(getSort);
   const category = useAppSelector(getCategory);
@@ -35,21 +42,26 @@ export const BooksPage = memo((props: BooksPageProps) => {
     refetchOnMountOrArgChange: true,
     skip: isSkipped,
   });
-  const volumes = response?.items;
+  // Volumes are not unique between pages (the same Volume could be on 1st and 2nd pages)
+  const volumes = response?.items || [];
   const total = response?.totalItems;
-  const isNotLastPage = total && startIndex < total;
+  // Doesn't work coz of not correct total items value gaven by Google Books API (every page request changes total books amount)
+  const isNotLastPage = Boolean(total && startIndex + maxResults < total);
   const onLoadMore = useCallback(() => {
     dispatch(BooksPageActions.IncrementPage());
   }, [dispatch]);
-  return ( // TODO: add query params support and correct pagination work (reload cache when filter/sort changed)
-    <VStack gap="16" align="stretch" className={classNames(cls.BooksPage, {}, [className])}>
-      <BooksPageHeader />
-      <VStack gap="16" className="content-wrapper">
-        <BooksList volumes={volumes} total={total} isFetching={isFetching} error={error} />
-        {isNotLastPage && <LoadMore onClick={onLoadMore} />}
+  useInitialEffect(() => {
+    dispatch(initBooksPage(searchParams));
+  });
+  return (
+    <DynamicModuleLoader removeAfterUnmount reducers={reducers}>
+      <VStack gap="16" align="stretch" className={classNames(cls.BooksPage, {}, [className])}>
+        <BooksPageHeader />
+        <VStack gap="16" className="content-wrapper">
+          <BooksList volumes={volumes} total={total} isFetching={isFetching} error={error} />
+          {isNotLastPage && <LoadMore onClick={onLoadMore} />}
+        </VStack>
       </VStack>
-
-    </VStack>
-
+    </DynamicModuleLoader>
   );
 });

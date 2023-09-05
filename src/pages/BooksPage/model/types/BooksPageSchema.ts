@@ -7,4 +7,5 @@ export interface BooksPageSchema {
   inputValue?: string;
   startIndex: number;
   maxResults: number;
+  _inited: boolean;
 }

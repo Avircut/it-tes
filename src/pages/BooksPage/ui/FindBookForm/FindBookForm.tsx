@@ -27,9 +27,7 @@ import cls from './FindBookForm.module.scss';
 interface FindBookFormProps {
   className?: string;
 }
-const reducers: ReducersList = {
-  booksPage: BooksPageReducer,
-};
+
 export const FindBookForm = memo((props: FindBookFormProps) => {
   const { className } = props;
   const { t } = useTranslation();
@@ -77,45 +75,43 @@ export const FindBookForm = memo((props: FindBookFormProps) => {
     dispatch(BooksPageActions.setQuery(inputValue));
   }, [dispatch, inputValue]);
   return (
-    <DynamicModuleLoader removeAfterUnmount reducers={reducers}>
-      <VStack
-        gap="32"
-        max
-        align="stretch"
-        className={classNames(cls.FindBookForm, {}, [className])}
-      >
-        <Text
-          size={TextSize.L}
-          theme={TextTheme.INVERTED}
-          title={t('Find a book')}
-          className={cls.title}
+    <VStack
+      gap="32"
+      max
+      align="stretch"
+      className={classNames(cls.FindBookForm, {}, [className])}
+    >
+      <Text
+        size={TextSize.L}
+        theme={TextTheme.INVERTED}
+        title={t('Find a book')}
+        className={cls.title}
+      />
+      <VStack gap="8" align="stretch" className={cls.formWrapper}>
+        <ButtonInput
+          placeholder={t('Input Placeholder')}
+          onClick={onSearchClick}
+          onKeyDown={onKeyDown}
+          onChange={onChangeInput}
+          value={inputValue}
         />
-        <VStack gap="8" align="stretch" className={cls.formWrapper}>
-          <ButtonInput
-            placeholder={t('Input Placeholder')}
-            onClick={onSearchClick}
-            onKeyDown={onKeyDown}
-            onChange={onChangeInput}
-            value={inputValue}
+        <HStack gap="16">
+          <Listbox
+            value={category}
+            defaultValue={Categories.ALL}
+            items={categories}
+            label={t('Category')}
+            onChange={onChangeCategory}
           />
-          <HStack gap="16">
-            <Listbox
-              value={category}
-              defaultValue={Categories.ALL}
-              items={categories}
-              label={t('Category')}
-              onChange={onChangeCategory}
-            />
-            <Listbox
-              value={sort}
-              defaultValue={Sorts.RELEVANCE}
-              items={sorts}
-              label={t('Sort by')}
-              onChange={onChangeSort}
-            />
-          </HStack>
-        </VStack>
+          <Listbox
+            value={sort}
+            defaultValue={Sorts.RELEVANCE}
+            items={sorts}
+            label={t('Sort by')}
+            onChange={onChangeSort}
+          />
+        </HStack>
       </VStack>
-    </DynamicModuleLoader>
+    </VStack>
   );
 });

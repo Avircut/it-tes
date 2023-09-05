@@ -8,6 +8,8 @@ import { Text, TextTheme, TextWeight } from 'shared/ui/Text/Text';
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
+import { useAppSelector } from 'shared/lib/hooks/useAppSelector/useAppSelector';
+import { getPage } from '../../model/selectors/findBookForm';
 import cls from './BooksList.module.scss';
 
 interface BooksListProps {
@@ -19,8 +21,9 @@ interface BooksListProps {
 }
 
 export const BooksList = memo((props : BooksListProps) => {
+  const page = useAppSelector(getPage);
   const {
-    className, volumes = [], isFetching, error, total = 0,
+    className, volumes = [], isFetching, error, total = -1,
   } = props;
   const { t } = useTranslation();
   if (error) {
@@ -31,7 +34,7 @@ export const BooksList = memo((props : BooksListProps) => {
       </VStack>
     );
   }
-  if (isFetching && !volumes.length) {
+  if (isFetching && page === 1) {
     return (
       <VStack gap="16" className="content-wrapper">
         <Skeleton width="100%" height={70} />
@@ -45,10 +48,17 @@ export const BooksList = memo((props : BooksListProps) => {
       </VStack>
     );
   }
-  if (!volumes.length) {
+  if (total === -1) {
     return (
       <HStack className="content-wrapper" max justify="center" align="center">
         <Text title={t('Please fill the form')} />
+      </HStack>
+    );
+  }
+  if (!total) {
+    return (
+      <HStack className="content-wrapper" max justify="center" align="center">
+        <Text title={t('No books found')} />
       </HStack>
     );
   }
@@ -59,7 +69,7 @@ export const BooksList = memo((props : BooksListProps) => {
       </HStack>
       <HStack align="stretch" className={classNames(cls.BooksList, {}, [className])}>
         {volumes.map((volume) => (
-          <BookCard key={volume.id} volume={volume} />
+          <BookCard key={`${Math.random()}-${volume.id}`} volume={volume} />
         ))}
         {isFetching
         && (

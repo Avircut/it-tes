@@ -17,10 +17,11 @@
   "Please fill the form": "Please fill the form to get books shown",
   "Total found": "Total found",
   "results": "books",
-  "Loading Books Error": "Error ocuared when loading books",
+  "Loading Books Error": "Error occured when loading books",
   "Something went wrong": "Something went wrong",
   "Reload Page": "Reload Page",
   "Make another request": "Try another request",
   "Load more": "Load more",
-  "Not Found": "Not Found"
+  "Not Found": "Not Found",
+  "No books found": "No books found"
 }

@@ -10,6 +10,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "downlevelIteration": true,
     "paths": {
       "*": ["./src/*"]
     },
@@ -17,7 +18,7 @@
   },
   "ts-node": {
     "compilerOptions": {
-      "module": "CommonJS"
+      "module": "CommonJS",
     }
   },
   "include":[
