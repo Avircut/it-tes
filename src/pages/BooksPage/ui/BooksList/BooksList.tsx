@@ -9,6 +9,7 @@ import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import { useAppSelector } from 'shared/lib/hooks/useAppSelector/useAppSelector';
+import { useClosestMedia } from 'shared/lib/hooks/useMediaQuery/useMediaQuery';
 import { getPage } from '../../model/selectors/findBookForm';
 import cls from './BooksList.module.scss';
 
@@ -26,6 +27,15 @@ export const BooksList = memo((props : BooksListProps) => {
     className, volumes = [], isFetching, error, total = -1,
   } = props;
   const { t } = useTranslation();
+  const media = useClosestMedia();
+  let cols = 5;
+  switch (media) {
+    case '320px': cols = 1; break;
+    case '480px': cols = 2; break;
+    case '640px': cols = 3; break;
+    case '820px': cols = 4; break;
+    default: cols = 5;
+  }
   if (error) {
     return (
       <VStack align="center" className="content-wrapper">
@@ -39,11 +49,7 @@ export const BooksList = memo((props : BooksListProps) => {
       <VStack gap="16" className="content-wrapper">
         <Skeleton width="100%" height={70} />
         <HStack max align="stretch" className={classNames(cls.BooksList, {}, [className])}>
-          <Skeleton width="100%" height={430} border="4" />
-          <Skeleton width="100%" height={430} border="4" />
-          <Skeleton width="100%" height={430} border="4" />
-          <Skeleton width="100%" height={430} border="4" />
-          <Skeleton width="100%" height={430} border="4" />
+          {[...Array(cols * 2)].map((el, index) => <Skeleton key={index} width="100%" height={430} border="4" />)}
         </HStack>
       </VStack>
     );
@@ -62,6 +68,7 @@ export const BooksList = memo((props : BooksListProps) => {
       </HStack>
     );
   }
+
   return (
     <VStack gap="16" className="content-wrapper">
       <HStack justify="center" align="center" max className={cls.amount}>
@@ -74,11 +81,7 @@ export const BooksList = memo((props : BooksListProps) => {
         {isFetching
         && (
         <>
-          <Skeleton width="100%" height={430} border="4" />
-          <Skeleton width="100%" height={430} border="4" />
-          <Skeleton width="100%" height={430} border="4" />
-          <Skeleton width="100%" height={430} border="4" />
-          <Skeleton width="100%" height={430} border="4" />
+          {[...Array(cols * 2)].map((el, index) => <Skeleton key={index} width="100%" height={430} border="4" />)}
         </>
         )}
       </HStack>

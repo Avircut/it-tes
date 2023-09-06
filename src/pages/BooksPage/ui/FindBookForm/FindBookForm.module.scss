@@ -6,3 +6,11 @@
 .title {
   text-align: center;
 }
+
+.listboxes {
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 580px) {
+    justify-content: center;
+  }
+}

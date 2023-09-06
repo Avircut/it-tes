@@ -1,5 +1,7 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import { memo } from 'react';
+import {
+  CSSProperties, Ref, forwardRef, memo,
+} from 'react';
 import cls from './Text.module.scss';
 
 export enum TextTheme {
@@ -32,6 +34,7 @@ interface TextProps {
   size?: TextSize;
   'data-testid'?: string;
   weight?: TextWeight;
+  style?: CSSProperties;
 }
 type HeaderTagType = 'h1' | 'h2' | 'h3';
 const mapSizeToHeaderTag: Record<TextSize, HeaderTagType> = {
@@ -40,7 +43,7 @@ const mapSizeToHeaderTag: Record<TextSize, HeaderTagType> = {
   [TextSize.L]: 'h1',
 };
 
-export const Text = memo((props: TextProps) => {
+const TextComponent = forwardRef<HTMLDivElement, TextProps>((props: TextProps, ref) => {
   const {
     className,
     title,
@@ -50,6 +53,7 @@ export const Text = memo((props: TextProps) => {
     size = TextSize.M,
     'data-testid': dataTestId = 'Text',
     weight = TextWeight.REGULAR,
+    style,
   } = props;
 
   const HeaderTag = mapSizeToHeaderTag[size];
@@ -60,10 +64,14 @@ export const Text = memo((props: TextProps) => {
         cls[align],
         cls[theme],
         cls[size],
+        cls[weight],
       ])}
+      ref={ref}
+      style={style}
     >
       {title && <HeaderTag data-testid={`${dataTestId}.Header`} className={cls.title}>{title}</HeaderTag>}
       {text && <p data-testid={`${dataTestId}.Paragraph`} className={cls.text}>{text}</p>}
     </div>
   );
 });
+export const Text = memo(TextComponent);

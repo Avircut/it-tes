@@ -45,15 +45,15 @@ export const FindBookForm = memo((props: FindBookFormProps) => {
   const inputValue = useAppSelector(getInputValue);
   const onChangeCategory = useCallback(
     (value: string) => {
-      dispatch(BooksPageActions.setQuery(inputValue));
       dispatch(BooksPageActions.setCategory(value as Categories));
+      dispatch(BooksPageActions.setQuery(inputValue));
     },
     [dispatch, inputValue],
   );
   const onChangeSort = useCallback(
     (value: string) => {
-      dispatch(BooksPageActions.setQuery(inputValue));
       dispatch(BooksPageActions.setSort(value as Sorts));
+      dispatch(BooksPageActions.setQuery(inputValue));
     },
     [dispatch, inputValue],
   );
@@ -95,7 +95,7 @@ export const FindBookForm = memo((props: FindBookFormProps) => {
           onChange={onChangeInput}
           value={inputValue}
         />
-        <HStack gap="16">
+        <HStack gap="16" className={cls.listboxes}>
           <Listbox
             value={category}
             defaultValue={Categories.ALL}
