@@ -2,11 +2,8 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { useTranslation } from 'react-i18next';
 import { memo } from 'react';
 import { HStack, VStack } from 'shared/ui/Stack';
-import { Volume } from 'entities/Book';
-import { BookCard } from 'entities/Book/ui/BookCard/BookCard';
+import { BookCard, Volume } from 'entities/Book';
 import { Text, TextTheme, TextWeight } from 'shared/ui/Text/Text';
-import { SerializedError } from '@reduxjs/toolkit';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import { useAppSelector } from 'shared/lib/hooks/useAppSelector/useAppSelector';
 import { useClosestMedia } from 'shared/lib/hooks/useMediaQuery/useMediaQuery';
@@ -17,7 +14,7 @@ interface BooksListProps {
   className?: string;
   volumes?: Volume[];
   isFetching: boolean;
-  error?: SerializedError | FetchBaseQueryError;
+  error?: any;
   total?: number;
 }
 

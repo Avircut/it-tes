@@ -6,16 +6,11 @@ import { Text, TextSize, TextTheme } from 'shared/ui/Text/Text';
 import { Listbox, ListboxItem } from 'shared/ui/ListBox/ListBox';
 import { ButtonInput } from 'shared/ui/ButtonInput/ButtonInput';
 import { Categories, Sorts } from 'entities/Book';
-import {
-  DynamicModuleLoader,
-  ReducersList,
-} from 'shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { useAppSelector } from 'shared/lib/hooks/useAppSelector/useAppSelector';
 
 import {
   BooksPageActions,
-  BooksPageReducer,
 } from '../../model/slices/BooksPageSlice';
 import {
   getCategory,

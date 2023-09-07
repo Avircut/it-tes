@@ -68,14 +68,17 @@
   }
 }
 
-.weight_regular {
+.weight_regular .text,
+.weight_bold .title {
   font-weight: 400;
 }
 
-.weight_semibold {
+.weight_semibold .text,
+.weight_bold .title {
   font-weight: 600;
 }
 
-.weight_bold {
+.weight_bold .text,
+.weight_bold .title {
   font-weight: 700;
 }

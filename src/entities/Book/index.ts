@@ -1,5 +1,4 @@
-export { Categories, Sorts } from './model/types/BookSchema';
+export { BookCard } from './ui/BookCard/BookCard';
 
-export { useFetchBooksList } from './model/services/BookService';
-
-export { Volume } from './model/types/BookSchema';
+export { Volume, Categories, Sorts } from './model/types/BookSchema';
+export { useFetchBooksList, BooksResponseSchema } from './model/services/BookService';

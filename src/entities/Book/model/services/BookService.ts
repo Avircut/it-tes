@@ -2,16 +2,19 @@ import { rtkApi } from 'shared/api/rtkApi';
 import { addQueryParams } from 'shared/lib/url/addQueryParams';
 import { Volume } from '../types/BookSchema';
 
-interface ResponseSchema {
+export interface BooksResponseSchema {
   items: Volume[];
   totalItems: number;
 }
+interface BooksRequestSchema {
+  query: string;
+  sort?: string;
+  startIndex?: number;
+  maxResults?: number;
+}
 const booksApi = rtkApi.injectEndpoints({
   endpoints: (build) => ({
-    FetchQueriedBooks: build.query<
-      ResponseSchema,
-      { query: string; sort?: string; startIndex?: number; maxResults?: number }
-    >({
+    FetchQueriedBooks: build.query<BooksResponseSchema, BooksRequestSchema>({
       query: ({
         query,
         sort = 'relevance',
@@ -52,7 +55,7 @@ const booksApi = rtkApi.injectEndpoints({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg?.startIndex !== previousArg?.startIndex;
       },
-      transformResponse: (response: ResponseSchema) => response,
+      transformResponse: (response: BooksResponseSchema) => response,
       providesTags: (result) => ['Book'],
     }),
   }),

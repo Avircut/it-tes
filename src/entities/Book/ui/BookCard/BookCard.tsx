@@ -1,7 +1,4 @@
 import { classNames } from 'shared/lib/classNames/classNames';
-import {
-  memo,
-} from 'react';
 import { VStack } from 'shared/ui/Stack';
 import { Text } from 'shared/ui/Text/Text';
 import defaultThumb from 'shared/assets/content/no-photo.png';
@@ -15,7 +12,7 @@ interface BookCardProps {
   volume?: Volume;
 }
 
-export const BookCard = memo((props: BookCardProps) => {
+export const BookCard = (props: BookCardProps) => {
   const { className, volume } = props;
   const book = volume?.volumeInfo;
   if (!book) return null;
@@ -45,4 +42,4 @@ export const BookCard = memo((props: BookCardProps) => {
       </Card>
     </AppLink>
   );
-});
+};

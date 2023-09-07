@@ -5,9 +5,9 @@ interface ImageLinks{
 interface Book {
   title: string;
   authors: string[];
-  publisher: string;
-  description: string;
-  pageCount: number;
+  publisher?: string;
+  description?: string;
+  pageCount?: number;
   categories: string[];
   imageLinks: ImageLinks;
   infoLink: string;
@@ -22,8 +22,8 @@ interface SaleInfo{
 export interface Volume {
   id: string;
   volumeInfo: Book;
-  saleInfo: SaleInfo;
-  buyLink: string;
+  saleInfo?: SaleInfo;
+  buyLink?: string;
 }
 
 export enum Categories {

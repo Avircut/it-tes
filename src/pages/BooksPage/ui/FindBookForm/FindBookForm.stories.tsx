@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { StoreDecorator } from 'shared/config/storybook/decorators/StoreDecorator/StoreDecorator';
 import { FindBookForm } from './FindBookForm';
 
 const meta = {
-  title: 'features/FindBookForm',
+  title: 'pages/BooksPage/FindBookForm',
   component: FindBookForm,
   tags: ['autodocs'],
 } satisfies Meta<typeof FindBookForm>;
@@ -13,4 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Normal: Story = {
   args: {
   },
+  decorators: [
+    StoreDecorator({}),
+  ],
 };
