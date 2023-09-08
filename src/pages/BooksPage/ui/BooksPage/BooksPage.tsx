@@ -18,13 +18,13 @@ import {
   getQuery, getSort, getCategory, getStartIndex, getMaxResults,
 } from '../../model/selectors/findBookForm';
 
-interface BooksPageProps {
+export interface BooksPageProps {
     className?: string;
 }
 const reducers: ReducersList = {
   booksPage: BooksPageReducer,
 };
-export const BooksPage = memo((props: BooksPageProps) => {
+const BooksPage = memo((props: BooksPageProps) => {
   const { className } = props;
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
@@ -55,7 +55,7 @@ export const BooksPage = memo((props: BooksPageProps) => {
   });
   return (
     <DynamicModuleLoader removeAfterUnmount reducers={reducers}>
-      <VStack gap="16" align="stretch" className={classNames(cls.BooksPage, {}, [className])}>
+      <VStack role="main" gap="16" align="stretch" className={classNames(cls.BooksPage, {}, [className])}>
         <BooksPageHeader />
         <VStack gap="16" className="content-wrapper">
           <BooksList volumes={volumes} total={total} isFetching={isFetching} error={error} />
@@ -65,3 +65,5 @@ export const BooksPage = memo((props: BooksPageProps) => {
     </DynamicModuleLoader>
   );
 });
+
+export default BooksPage;

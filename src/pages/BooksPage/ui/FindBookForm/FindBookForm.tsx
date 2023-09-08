@@ -71,6 +71,7 @@ export const FindBookForm = memo((props: FindBookFormProps) => {
   }, [dispatch, inputValue]);
   return (
     <VStack
+      role="form"
       gap="32"
       max
       align="stretch"
@@ -84,6 +85,7 @@ export const FindBookForm = memo((props: FindBookFormProps) => {
       />
       <VStack gap="8" align="stretch" className={cls.formWrapper}>
         <ButtonInput
+          role="search"
           placeholder={t('Input Placeholder')}
           onClick={onSearchClick}
           onKeyDown={onKeyDown}

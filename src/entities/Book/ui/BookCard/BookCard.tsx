@@ -1,9 +1,9 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { VStack } from 'shared/ui/Stack';
 import { Text } from 'shared/ui/Text/Text';
-import defaultThumb from 'shared/assets/content/no-photo.png';
 import { Card } from 'shared/ui/Card/Card';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
+import defaultThumb from 'shared/assets/content/no-photo.png';
 import { Volume } from '../../model/types/BookSchema';
 import cls from './BookCard.module.scss';
 
@@ -18,7 +18,7 @@ export const BookCard = (props: BookCardProps) => {
   if (!book) return null;
 
   return (
-    <AppLink to={book.infoLink} className={cls.link}>
+    <AppLink to={book.infoLink} className={cls.link} data-testid="BookCard">
       <Card>
         <VStack gap="8" className={classNames(cls.BookCard, {}, [className])}>
           <img

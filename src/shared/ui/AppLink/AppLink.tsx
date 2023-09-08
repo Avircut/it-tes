@@ -11,14 +11,15 @@ interface AppLinkProps extends LinkProps {
   className?: string;
   theme?: AppLinkTheme;
   children?: ReactNode;
+  'data-testid'?: string;
 }
 
 export const AppLink = memo((props:AppLinkProps) => {
   const {
-    to, children, className, theme = AppLinkTheme.PRIMARY, ...otherProps
+    to, children, className, theme = AppLinkTheme.PRIMARY, 'data-testid': dataTestId = 'Link', ...otherProps
   } = props;
   return (
-    <Link to={to} className={classNames(cls.AppLink, {}, [className, cls[theme]])} {...otherProps}>
+    <Link data-testid={dataTestId} to={to} className={classNames(cls.AppLink, {}, [className, cls[theme]])} {...otherProps}>
       {children}
     </Link>
   );

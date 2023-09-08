@@ -36,14 +36,14 @@ export const BooksList = memo((props : BooksListProps) => {
   if (error) {
     return (
       <VStack align="center" className="content-wrapper">
-        <Text theme={TextTheme.ERROR} title={t('Loading Books Error')} />
+        <Text data-testid="LoadingError" theme={TextTheme.ERROR} title={t('Loading Books Error')} />
         <Text theme={TextTheme.ERROR} text={t('Make another request')} />
       </VStack>
     );
   }
   if (isFetching && page === 1) {
     return (
-      <VStack gap="16" className="content-wrapper">
+      <VStack data-testid="Loading" gap="16" className="content-wrapper">
         <Skeleton width="100%" height={70} />
         <HStack max align="stretch" className={classNames(cls.BooksList, {}, [className])}>
           {[...Array(cols * 2)].map((el, index) => <Skeleton key={index} width="100%" height={430} border="4" />)}

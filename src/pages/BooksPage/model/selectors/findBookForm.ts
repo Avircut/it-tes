@@ -13,5 +13,5 @@ export const getInited = (state: StateSchema) => state.booksPage?._inited || fal
 export const getPage = createSelector(
   getStartIndex,
   getMaxResults,
-  (startIndex, maxResults) => Math.ceil(startIndex / maxResults) + 1,
+  (startIndex, maxResults) => Math.max(Math.floor(startIndex / maxResults) + 1, 1),
 );

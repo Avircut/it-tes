@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { StoreDecorator } from 'shared/config/storybook/decorators/StoreDecorator/StoreDecorator';
-import { BooksPage } from './BooksPage';
+import BooksPage from './BooksPage';
 
 const meta = {
   title: 'pages/BooksPage/BooksPage',

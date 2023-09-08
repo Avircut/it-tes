@@ -40,6 +40,7 @@ export interface FlexProps extends DivProps {
   gap?: FlexGap;
   max?: boolean;
   grow?: boolean;
+  'data-testid'?:string;
 }
 
 export const Flex = (props: FlexProps) => {
@@ -52,6 +53,7 @@ export const Flex = (props: FlexProps) => {
     gap = '4',
     max = false,
     grow = false,
+    'data-testid': dataTestId = 'Flex',
   } = props;
   const mods:Mods = {
     [cls.max]: max,
@@ -66,6 +68,7 @@ export const Flex = (props: FlexProps) => {
         directionClasses[direction],
         gapClasses[gap],
       ])}
+      data-testid={dataTestId}
     >
       {children}
     </div>

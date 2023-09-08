@@ -34,7 +34,7 @@ export function Listbox(props: ListboxProps) {
   } = props;
   const optionClasses = [cls[direction]];
   return (
-    <HStack>
+    <HStack role="listbox">
       {label && <span>{`${label}:`}</span>}
       <HListbox
         disabled={readonly}
@@ -64,6 +64,8 @@ export function Listbox(props: ListboxProps) {
                 >
                   {({ active, selected }) => (
                     <li
+                      role="option"
+                      aria-selected={selected}
                       className={classNames(
                         cls.item,
                         { [cls.active]: active, [cls.selected]: selected, [cls.disabled]: item.disabled },
